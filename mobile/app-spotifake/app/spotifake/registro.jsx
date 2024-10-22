@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Pressable, TextInput, StyleSheet, StatusBar } from 'react-native';
 import { useState } from 'react';
+import { useFonts } from 'expo-font';
 
 const Salvar = (info) => {
     if(!info.nome || !info.sobrenome || !info.email || !info.senha || !info.dataNascimento){
@@ -11,15 +12,35 @@ const Salvar = (info) => {
     }
 }
 
+
 export default function Registro() {
     const [press, setPress] = useState(false)
     const [formData, setFormData] = useState({
-        'nome': '',
-        'sobrenome': '',
-        'email': '',
-        'senha': '',
-        'dataNascimento': ''
+        nome: '',
+        sobrenome: '',
+        email: '',
+        senha: '',
+        dataNascimento: ''
     })
+    const [fontsLoaded] = useFonts({
+        'Gotham-Black': require('../../assets/fonts/Gotham-Black.otf'),
+        'Gotham-Bold': require('../../assets/fonts/Gotham-Bold.otf'),
+        'Gotham-Bookitalic': require('../../assets/fonts/Gotham-BookItalic.otf'),
+        'Gotham-Light': require('../../assets/fonts/Gotham-Light.otf'),
+        'Gotham-Thin': require('../../assets/fonts/Gotham-Thin.otf'),
+        'Gotham-Thinitalic': require('../../assets/fonts/Gotham-ThinItalic.otf'),
+        'Gotham-Black': require('../../assets/fonts/Gotham-Black.otf'),
+        'Gotham-Ultraitalic': require('../../assets/fonts/Gotham-UltraItalic.otf'),
+        'Gotham-XLight': require('../../assets/fonts/Gotham-XLight.otf'),
+        'Gotham-XLightItalic': require('../../assets/fonts/Gotham-XLightItalic.otf'),
+    });
+
+    if (!fontsLoaded) {
+        return null;
+    }
+
+
+    
     return (
         <View style={styles.container}>
             <StatusBar hidden={true} />
@@ -67,7 +88,7 @@ export default function Registro() {
                     onPressIn={() => setPress(true)}
                     onPressOut={() => setPress(false)}
                 >
-                    <Text style={{ color: '#FFFF', fontSize: 20, fontWeight: 'bold' }}>
+                    <Text style={{ color: '#FFFF', fontSize: 20, fontFamily: 'Gotham-Black' }}>
                         Registrar
                     </Text>
                 </Pressable>
@@ -105,12 +126,13 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         color: '#FFFF',
         paddingLeft: 20,
-        textAlign: 'left'
+        textAlign: 'left',
+        fontFamily: 'Gotham-XLight'
     },
     titulo: {
         color: '#FFFF',
         fontSize: 40,
-        fontWeight: 'bold'
+        fontFamily: 'Gotham-Black'
 
     },
     caixatitulo: {

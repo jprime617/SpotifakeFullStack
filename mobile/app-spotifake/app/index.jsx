@@ -2,17 +2,36 @@ import React from 'react';
 import { View, Text, Pressable, TextInput, StyleSheet, StatusBar } from 'react-native';
 import { useState, useEffect } from 'react';
 import { Link } from 'expo-router'
+import { useFonts } from 'expo-font';
 
 export default function App() {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [press, setPress] = useState(false)
+    const [fontsLoaded] = useFonts({
+        'Gotham-Black': require('../assets/fonts/Gotham-Black.otf'),
+        'Gotham-Bold': require('../assets/fonts/Gotham-Bold.otf'),
+        'Gotham-Bookitalic': require('../assets/fonts/Gotham-BookItalic.otf'),
+        'Gotham-Light': require('../assets/fonts/Gotham-Light.otf'),
+        'Gotham-Thin': require('../assets/fonts/Gotham-Thin.otf'),
+        'Gotham-Thinitalic': require('../assets/fonts/Gotham-ThinItalic.otf'),
+        'Gotham-Black': require('../assets/fonts/Gotham-Black.otf'),
+        'Gotham-Ultraitalic': require('../assets/fonts/Gotham-UltraItalic.otf'),
+        'Gotham-XLight': require('../assets/fonts/Gotham-XLight.otf'),
+        'Gotham-XLightItalic': require('../assets/fonts/Gotham-XLightItalic.otf'),
+    });
+
+    if (!fontsLoaded) {
+        return null;
+    }
+
+
     return (
         <View style={styles.container}>
             <StatusBar hidden={true} />
             <View style={styles.caixatitulo}>
                 <Text style={styles.titulo}>SpotiFake</Text>
-                <Text style={{color: '#FFFF', marginTop: 70, fontWeight: 'bold'}}>Login</Text>
+                <Text style={{ color: '#FFFF', marginTop: 70, fontFamily: 'Gotham-Black' }}>Login</Text>
             </View>
             <View style={styles.caixainput}>
                 <TextInput
@@ -36,13 +55,13 @@ export default function App() {
                     onPressIn={() => setPress(true)}
                     onPressOut={() => setPress(false)}
                 >
-                    <Text style={{color: '#FFFF', fontSize: 20, fontWeight: 'bold'}}>
+                    <Text style={{ color: '#FFFF', fontSize: 20, fontFamily: 'Gotham-Black' }}>
                         Login
                     </Text>
                 </Pressable>
                 <Link href={'/spotifake/registro'} asChild>
                     <Pressable style={styles.link}>
-                        <Text style={{ textDecorationLine: 'underline', color: '#FFFF' }}>
+                        <Text style={{ textDecorationLine: 'underline', color: '#FFFF', fontFamily: 'Gotham-XLight' }}>
                             Crie Sua Conta
                         </Text>
                     </Pressable>
@@ -80,12 +99,14 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         color: '#FFFF',
         paddingLeft: 20,
-        textAlign: 'left'
+        paddingRight: 10,
+        textAlign: 'left',
+        fontFamily: 'Gotham-XLight'
     },
     titulo: {
         color: '#FFFF',
         fontSize: 40,
-        fontWeight: 'bold'
+        fontFamily: 'Gotham-Bold',
 
     },
     caixatitulo: {
