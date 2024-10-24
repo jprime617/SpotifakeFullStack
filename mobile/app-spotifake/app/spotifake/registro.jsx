@@ -1,13 +1,13 @@
 import React from 'react';
-import { View, Text, Pressable, TextInput, StyleSheet, StatusBar } from 'react-native';
+import { View, Text, Pressable, TextInput, StyleSheet, StatusBar, Button } from 'react-native';
 import { useState } from 'react';
 import { useFonts } from 'expo-font';
 
 const Salvar = (info) => {
-    if(!info.nome || !info.sobrenome || !info.email || !info.senha || !info.dataNascimento){
+    if (!info.nome || !info.sobrenome || !info.email || !info.senha || !info.dataNascimento) {
         console.log('Ta faltando para ai irmao')
         return
-    }else{
+    } else {
         console.log(info)
     }
 }
@@ -40,7 +40,32 @@ export default function Registro() {
     }
 
 
-    
+    const connect = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/registro', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.text();
+
+            if (response.ok) {
+                console.log("Registro realizado com sucesso!");
+            } else {
+                console.log("Erro ao realizar o Registro:", data);
+            }
+
+        } catch (error) {
+            console.error(error);
+            console.log('Erro', 'Não foi possível conectar ao servidor.');
+        }
+    };
+
+
+
     return (
         <View style={styles.container}>
             <StatusBar hidden={true} />
@@ -84,7 +109,7 @@ export default function Registro() {
                     placeholderTextColor='gray'
                 />
                 <Pressable style={[styles.botao, press && styles.bpress]}
-                    onPress={() => Salvar(formData)}
+                    onPress={connect}
                     onPressIn={() => setPress(true)}
                     onPressOut={() => setPress(false)}
                 >
@@ -92,6 +117,7 @@ export default function Registro() {
                         Registrar
                     </Text>
                 </Pressable>
+                <Button title='Registrar' onPress={connect} />
             </View>
 
         </View>

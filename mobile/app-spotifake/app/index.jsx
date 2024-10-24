@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Pressable, TextInput, StyleSheet, StatusBar } from 'react-native';
+import { View, Text, Pressable, TextInput, StyleSheet, StatusBar, Button } from 'react-native';
 import { useState, useEffect } from 'react';
 import { Link } from 'expo-router'
 import { useFonts } from 'expo-font';
@@ -24,6 +24,33 @@ export default function App() {
     if (!fontsLoaded) {
         return null;
     }
+
+    const connect = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email,
+                    senha
+                }),
+            });
+            const data = await response.json();
+
+            if (response.ok) {
+                console.log("Login realizado com sucesso!");
+                console.log("Token JWT:", data.tokenJWT);
+            } else {
+                console.log("Erro ao realizar login:", data);
+            }
+
+        } catch (error) {
+            console.error(error);
+            console.log('Erro', 'Não foi possível conectar ao servidor.');
+        }
+    };
 
 
     return (
@@ -51,7 +78,7 @@ export default function App() {
 
                 />
                 <Pressable style={[styles.botao, press && styles.bpress]}
-                    onPress={() => { console.log(email); console.log(senha) }}
+                    onPress={connect}
                     onPressIn={() => setPress(true)}
                     onPressOut={() => setPress(false)}
                 >
@@ -66,6 +93,7 @@ export default function App() {
                         </Text>
                     </Pressable>
                 </Link>
+                <Button title='login' onPress={connect} />
             </View>
         </View>
     )

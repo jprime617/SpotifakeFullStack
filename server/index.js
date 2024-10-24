@@ -1,9 +1,12 @@
 import Express from "express";
 import { criarTabelas, User } from "./db.js";
 import bcryptjs from 'bcryptjs'
+import jsonwebtoken from 'jsonwebtoken'
+import cors from 'cors'
 
 const app = Express()
 app.use(Express.json())
+app.use(cors())
 // criarTabelas()
 
 app.post('/registro', async (req, res) => {
@@ -12,7 +15,7 @@ app.post('/registro', async (req, res) => {
         res.send('tem que preencher tudo cabaço')
         return
     }
-    const emailExist = await User.findOne({where: { email:email } })
+    const emailExist = await User.findOne({ where: { email: email } })
     if (emailExist) {
         return res.send('Esse Email já Está Cadastrado')
     }
@@ -25,7 +28,7 @@ app.post('/registro', async (req, res) => {
 
 
     const senhaCriptografada = bcryptjs.hashSync(senha, 10)
-    const teste = await User.create({ nome, sobrenome, email, senha:senhaCriptografada, dataNascimento, cpf })
+    const teste = await User.create({ nome, sobrenome, email, senha: senhaCriptografada, dataNascimento, cpf })
 
 
 
@@ -39,17 +42,32 @@ app.post('/login', async (req, res) => {
         return
     }
 
-    const userExist = await User.findOne({where: { email:email } })
+    const userExist = await User.findOne({ where: { email: email } })
     if (!userExist) {
         return res.send('Esse Usuario Não Existe')
     }
     const senhaValida = bcryptjs.compareSync(senha, userExist.senha)
-    if(!senhaValida){
+    if (!senhaValida) {
         return res.send('Senha invalida')
     }
 
 
-    res.send(`Email: ${email}\n Senha: ${senha}`)
+    const token = jsonwebtoken.sign(
+        {
+            "nome_completo": `${userExist.nome} ${userExist.sobrenome}`,
+            "email": userExist.email,
+            "status": userExist.status
+        },
+        'chavecriptografiajwt',
+        {expiresIn: 1000*60*5}
+    )
+    console.log(token)
+
+
+    res.send({
+        msg: "Usuario Logado",
+        tokenJWT: token
+    })
 })
 
 
