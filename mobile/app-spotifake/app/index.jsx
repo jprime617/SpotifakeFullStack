@@ -32,25 +32,22 @@ export default function App() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    email,
-                    senha
-                }),
+                body: JSON.stringify({ email, senha }),
             });
             const data = await response.json();
-
+    
             if (response.ok) {
                 console.log("Login realizado com sucesso!");
                 console.log("Token JWT:", data.tokenJWT);
             } else {
-                console.log("Erro ao realizar login:", data);
+                console.log("Erro ao realizar login:", data.error);
+                alert(data.error);
             }
-
         } catch (error) {
-            console.error(error);
-            console.log('Erro', 'Não foi possível conectar ao servidor.');
+            console.error("Erro ao conectar ao servidor:", error);
         }
     };
+    
 
 
     return (

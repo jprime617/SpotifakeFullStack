@@ -36,21 +36,20 @@ app.post('/registro', async (req, res) => {
 })
 
 app.post('/login', async (req, res) => {
-    const { email, senha, } = req.body
+    const { email, senha } = req.body;
     if (!email || !senha) {
-        res.send('tem que preencher tudo cabaço')
-        return
+        return res.status(400).json({ error: 'tem que preencher tudo cabaço' });
     }
 
-    const userExist = await User.findOne({ where: { email: email } })
+    const userExist = await User.findOne({ where: { email: email } });
     if (!userExist) {
-        return res.send('Esse Usuario Não Existe')
-    }
-    const senhaValida = bcryptjs.compareSync(senha, userExist.senha)
-    if (!senhaValida) {
-        return res.send('Senha invalida')
+        return res.status(404).json({ error: 'Esse Usuario Não Existe' });
     }
 
+    const senhaValida = bcryptjs.compareSync(senha, userExist.senha);
+    if (!senhaValida) {
+        return res.status(401).json({ error: 'Senha invalida' });
+    }
 
     const token = jsonwebtoken.sign(
         {
@@ -59,16 +58,15 @@ app.post('/login', async (req, res) => {
             "status": userExist.status
         },
         'chavecriptografiajwt',
-        {expiresIn: 1000*60*5}
-    )
-    console.log(token)
+        { expiresIn: '5m' }
+    );
 
-
-    res.send({
+    res.json({
         msg: "Usuario Logado",
         tokenJWT: token
-    })
-})
+    });
+});
+
 
 
 
