@@ -90,7 +90,6 @@ export default function App() {
                         </Text>
                     </Pressable>
                 </Link>
-                <Button title='login' onPress={connect} />
             </View>
         </View>
     )

@@ -20,7 +20,8 @@ export default function Registro() {
         sobrenome: '',
         email: '',
         senha: '',
-        dataNascimento: ''
+        dataNascimento: '',
+        cpf: ''
     })
     const [fontsLoaded] = useFonts({
         'Gotham-Black': require('../../assets/fonts/Gotham-Black.otf'),
@@ -108,6 +109,13 @@ export default function Registro() {
                     onChangeText={(alek) => setFormData({ ...formData, dataNascimento: alek })}
                     placeholderTextColor='gray'
                 />
+                <TextInput
+                    style={styles.input}
+                    placeholder='CPF *Opcional*'
+                    value={formData.cpf}
+                    onChangeText={(alek) => setFormData({ ...formData, cpf: alek })}
+                    placeholderTextColor='gray'
+                />
                 <Pressable style={[styles.botao, press && styles.bpress]}
                     onPress={connect}
                     onPressIn={() => setPress(true)}
@@ -117,7 +125,6 @@ export default function Registro() {
                         Registrar
                     </Text>
                 </Pressable>
-                <Button title='Registrar' onPress={connect} />
             </View>
 
         </View>
