@@ -27,7 +27,7 @@ export default function App() {
 
     const connect = async () => {
         try {
-            const response = await fetch('http://localhost:8000/login', {
+            const response = await fetch('http://localhost:8000/autenticacao/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
