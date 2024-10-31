@@ -83,7 +83,7 @@ export default function App() {
                         Login
                     </Text>
                 </Pressable>
-                <Link href={'/spotifake/registro'} asChild>
+                <Link href={'/cadastro/registro'} asChild>
                     <Pressable style={styles.link}>
                         <Text style={{ textDecorationLine: 'underline', color: '#FFFF', fontFamily: 'Gotham-XLight' }}>
                             Crie Sua Conta
