@@ -54,7 +54,10 @@ export default function Registro() {
             const data = await response.text();
 
             if (response.ok) {
-                console.log("Registro realizado com sucesso!");
+                if (data == 'Esse Email já Está Cadastrado') {
+                    return alert("Esse email ai Ja ta cadastrado");
+                }
+                    alert('Registrado com Sucesso');
             } else {
                 console.log("Erro ao realizar o Registro:", data);
             }
