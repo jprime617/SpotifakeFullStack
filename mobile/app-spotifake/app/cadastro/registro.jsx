@@ -2,18 +2,11 @@ import React from 'react';
 import { View, Text, Pressable, TextInput, StyleSheet, StatusBar, Button } from 'react-native';
 import { useState } from 'react';
 import { useFonts } from 'expo-font';
-
-const Salvar = (info) => {
-    if (!info.nome || !info.sobrenome || !info.email || !info.senha || !info.dataNascimento) {
-        console.log('Ta faltando para ai irmao')
-        return
-    } else {
-        console.log(info)
-    }
-}
+import { useRouter } from 'expo-router';
 
 
 export default function Registro() {
+    const router = useRouter();
     const [press, setPress] = useState(false)
     const [formData, setFormData] = useState({
         nome: '',
@@ -57,7 +50,11 @@ export default function Registro() {
                 if (data == 'Esse Email já Está Cadastrado') {
                     return alert("Esse email ai Ja ta cadastrado");
                 }
+                if (data == 'tem que preencher tudo cabaço') {
+                    return alert('preenche esse caralho ai porra')
+                }
                     alert('Registrado com Sucesso');
+                    router.push('/')
             } else {
                 console.log("Erro ao realizar o Registro:", data);
             }

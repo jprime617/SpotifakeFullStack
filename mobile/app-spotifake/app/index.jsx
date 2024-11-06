@@ -3,10 +3,10 @@ import { View, Text, Pressable, TextInput, StyleSheet, StatusBar, Button } from 
 import { useState, useEffect } from 'react';
 import { Link } from 'expo-router'
 import { useFonts } from 'expo-font';
-import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 
 export default function App() {
-    const navigation = useNavigation();
+    const router = useRouter();
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [press, setPress] = useState(false)
@@ -40,7 +40,7 @@ export default function App() {
 
             if (response.ok) {
                 console.log("Login realizado com sucesso!");
-                navigation.navigate("Pagar"); // Navega para a tela Home
+                router.push('home/home')
             } else {
                 console.log("Erro ao realizar login:", data.error);
                 alert(data.error);
