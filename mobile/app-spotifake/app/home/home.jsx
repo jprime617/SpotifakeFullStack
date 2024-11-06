@@ -3,7 +3,7 @@ import { View, Text } from "react-native";
 export default function Home() {
     return(
         <View>
-            <Text>
+            <Text style={{color: 'white'}}>
                 Me MAta Home
             </Text>
         </View>
