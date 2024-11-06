@@ -5,7 +5,7 @@ import { Link } from 'expo-router'
 import { useFonts } from 'expo-font';
 import { useRouter } from 'expo-router';
 
-export default function App() {
+export default function Login() {
     const router = useRouter();
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
