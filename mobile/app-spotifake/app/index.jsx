@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, Pressable, TextInput, StyleSheet, StatusBar, Button } from 'react-native';
-import { useState, useEffect } from 'react';
-import { Link } from 'expo-router'
+import { Link, useRouter } from 'expo-router'
 import { useFonts } from 'expo-font';
-import { useRouter } from 'expo-router';
+import { AuthContext } from '../scripts/authContext';
 
 export default function Login() {
+    const { tokien, setTokien } = useContext(AuthContext)
     const router = useRouter();
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
@@ -40,6 +40,8 @@ export default function Login() {
 
             if (response.ok) {
                 console.log("Login realizado com sucesso!");
+                setTokien(data.tokenJWT)
+                console.log(tokien)
                 router.push('home/home')
             } else {
                 console.log("Erro ao realizar login:", data.error);
@@ -76,15 +78,15 @@ export default function Login() {
                     placeholderTextColor='gray'
 
                 />
-                    <Pressable style={[styles.botao, press && styles.bpress]}
-                        onPress={connect}
-                        onPressIn={() => setPress(true)}
-                        onPressOut={() => setPress(false)}
-                    >
-                        <Text style={{ color: '#FFFF', fontSize: 20, fontFamily: 'Gotham-Black' }}>
-                            Login
-                        </Text>
-                    </Pressable>
+                <Pressable style={[styles.botao, press && styles.bpress]}
+                    onPress={connect}
+                    onPressIn={() => setPress(true)}
+                    onPressOut={() => setPress(false)}
+                >
+                    <Text style={{ color: '#FFFF', fontSize: 20, fontFamily: 'Gotham-Black' }}>
+                        Login
+                    </Text>
+                </Pressable>
                 <Link href={'/cadastro/registro'} asChild>
                     <Pressable style={styles.link}>
                         <Text style={{ textDecorationLine: 'underline', color: '#FFFF', fontFamily: 'Gotham-XLight' }}>

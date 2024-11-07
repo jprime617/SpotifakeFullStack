@@ -1,11 +1,14 @@
 import { Stack } from 'expo-router';
+import { AuthProvider } from '../scripts/authContext';
 
 const Layout = () => {
   return (
-    <Stack screenOptions={{
-      headerShown: false,
-      contentStyle: { backgroundColor: '#250902' } // Define o fundo diretamente no contentStyle
-    }} />
+    <AuthProvider>
+      <Stack screenOptions={{
+        headerShown: false,
+        contentStyle: { backgroundColor: '#250902' },
+      }} />
+    </AuthProvider>
   );
 };
 
