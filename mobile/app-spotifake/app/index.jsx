@@ -37,10 +37,10 @@ export default function Login() {
                 body: JSON.stringify({ email, senha }),
             });
             const data = await response.json();
-
+            console.log(response.ok)
             if (response.ok) {
                 console.log("Login realizado com sucesso!");
-                setTokien(data.tokenJWT)
+                setTokien(JSON.stringify(data.tokenJWT))
                 console.log(tokien)
                 router.push('home/home')
             } else {
@@ -78,15 +78,17 @@ export default function Login() {
                     placeholderTextColor='gray'
 
                 />
-                <Pressable style={[styles.botao, press && styles.bpress]}
-                    onPress={connect}
-                    onPressIn={() => setPress(true)}
-                    onPressOut={() => setPress(false)}
-                >
-                    <Text style={{ color: '#FFFF', fontSize: 20, fontFamily: 'Gotham-Black' }}>
-                        Login
-                    </Text>
-                </Pressable>
+                <Link href={'/foda-se'} asChild>
+                    <Pressable style={[styles.botao, press && styles.bpress]}
+                        // onPress={connect}
+                        onPressIn={() => setPress(true)}
+                        onPressOut={() => setPress(false)}
+                    >
+                        <Text style={{ color: '#FFFF', fontSize: 20, fontFamily: 'Gotham-Black' }}>
+                            Login
+                        </Text>
+                    </Pressable>
+                </Link>
                 <Link href={'/cadastro/registro'} asChild>
                     <Pressable style={styles.link}>
                         <Text style={{ textDecorationLine: 'underline', color: '#FFFF', fontFamily: 'Gotham-XLight' }}>

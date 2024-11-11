@@ -14,10 +14,12 @@ export default function Inicio() {
                         <Text style={{ color: 'white' }}>Perfil</Text>
                     </Pressable>
                 </Link>
-                <Pressable onPress={console.log(tokien)}>
-                    <Text style={{ color: 'white' }}>Olokinho Meu</Text>
-                </Pressable>
                 <Text style={{ color: 'white' }}>{tokien}</Text>
+                <Link href={'/pagamento/pagar'} asChild>
+                    <Pressable>
+                        <Text style={{color: 'white'}}>Pagar</Text>
+                    </Pressable>
+                </Link>
             </View>
         </View>
     )
