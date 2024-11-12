@@ -1,15 +1,15 @@
 import { View, Text, Image, StyleSheet, Button, Pressable } from "react-native";
 import React, { useState, useContext } from "react";
-import { AuthContext } from "../../scripts/authContext";
+import { AuthContext } from "../../scripts/authContext.js";
 import * as ImagePicker from 'expo-image-picker';
 import { jwtDecode } from 'jwt-decode'
-import { AdvancedImage, upload } from 'cloudinary-react-native';
-import { Cloudinary } from "@cloudinary/url-gen";
 import { Link } from "expo-router";
 
 export default function User() {
-    const { foto, setFoto, tokien, setTokien } = useContext(AuthContext)
+    const { foto, setFoto, tokien, ngrok } = useContext(AuthContext)
     const infoUser = jwtDecode(tokien)
+    const [formData, setFormData] = useState({ foto: '' })
+    
 
 
 
@@ -29,6 +29,35 @@ export default function User() {
         }
     };
 
+    const handleSendImage = async () => {
+        try {
+            const data = {
+                "file": foto,
+                "upload_preset": "ml_default",
+                "name": "teste"
+            }
+            const res = await fetch('https://api.cloudinary.com/v1_1/ds4obhf70/upload',
+                {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+            const result = await res.json()
+            console.log(result.url)
+            setFormData({ ...formData, foto: result.url})
+            console.log(formData)
+
+        } catch (erro) {
+            console.log(e)
+        }
+    }
+
+
+
+
+
     return (
         <View style={styles.container}>
             <Pressable onPress={() => pickImage()}>
@@ -44,6 +73,9 @@ export default function User() {
                     <Text style={{ color: 'white' }}>Premium</Text>
                 </Pressable>
             </Link>
+            <Pressable onPress={() => handleSendImage()}>
+                <Text style={{ color: 'white' }}>upload</Text>
+            </Pressable>
         </View>
     );
 }

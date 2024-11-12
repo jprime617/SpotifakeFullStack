@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { View, Text, Pressable, TextInput, StyleSheet, StatusBar, Button } from 'react-native';
 import { Link, useRouter } from 'expo-router'
 import { useFonts } from 'expo-font';
-import { AuthContext } from '../scripts/authContext';
+import { AuthContext } from '../scripts/authContext.js';
 
 export default function Login() {
     const { tokien, setTokien, ngrok, setNgrok } = useContext(AuthContext)

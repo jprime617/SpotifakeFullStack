@@ -4,7 +4,6 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../scripts/authContext";
 
 export default function Inicio() {
-    const { tokien, setTokien } = useContext(AuthContext)
 
     return (
         <View style={styles.container}>
@@ -13,7 +12,6 @@ export default function Inicio() {
                         <Text style={{ color: 'white' }}>Perfil</Text>
                     </Pressable>
                 </Link>
-                <Text style={{ color: 'white' }}>{tokien}</Text>
                 <Link href={'/pagamento/pagar'} asChild>
                     <Pressable>
                         <Text style={{ color: 'white' }}>Pagar</Text>
