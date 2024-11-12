@@ -1,9 +1,14 @@
 import { View, Text, Image, StyleSheet, Button, Pressable } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../../scripts/authContext";
 import * as ImagePicker from 'expo-image-picker';
+import jwt_decode, { jwtDecode } from 'jwt-decode'
 
 export default function User() {
-    const [foto, setFoto] = useState('https://play-lh.googleusercontent.com/r0xN9hXjVDp3Jy6auZhvByz7HN7PfnikPQAis49N3rMoltG1VT_z_iZPr9GHJQ5r9zg=w240-h480-rw');
+    const { foto, setFoto, tokien, setTokien } = useContext(AuthContext)
+    const infoUser = jwtDecode(tokien)
+
+    
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -28,6 +33,11 @@ export default function User() {
                     source={{ uri: foto }}
                 />
             </Pressable>
+            <Text style={{color: 'white', width: 200}}>{infoUser.nome_completo}</Text>
+            <Text style={{color: 'white', width: 200}}>{infoUser.status}</Text>
+            <Pressable style={styles.botao}>
+                <Text style={{color: 'white'}}>Premium</Text>
+            </Pressable>
         </View>
     );
 }
@@ -36,7 +46,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#250902',
     },
     image: {
         width: 200,

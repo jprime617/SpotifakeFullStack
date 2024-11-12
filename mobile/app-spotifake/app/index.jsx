@@ -9,7 +9,6 @@ export default function Login() {
     const router = useRouter();
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
-    const [press, setPress] = useState(false)
     const [fontsLoaded] = useFonts({
         'Gotham-Black': require('../assets/fonts/Gotham-Black.otf'),
         'Gotham-Bold': require('../assets/fonts/Gotham-Bold.otf'),
@@ -29,7 +28,7 @@ export default function Login() {
 
     const connect = async () => {
         try {
-            const response = await fetch('http://localhost:8000/autenticacao/login', {
+            const response = await fetch('http://192.168.0.116:8000/autenticacao/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -78,23 +77,24 @@ export default function Login() {
                     placeholderTextColor='gray'
 
                 />
-                <Link href={'/foda-se'} asChild>
-                    <Pressable style={[styles.botao, press && styles.bpress]}
-                        // onPress={connect}
-                        onPressIn={() => setPress(true)}
-                        onPressOut={() => setPress(false)}
-                    >
-                        <Text style={{ color: '#FFFF', fontSize: 20, fontFamily: 'Gotham-Black' }}>
-                            Login
-                        </Text>
-                    </Pressable>
-                </Link>
+
+                <Pressable style={styles.botao}
+                    onPress={connect}
+                >
+                    <Text style={{ color: '#FFFF', fontSize: 20, fontFamily: 'Gotham-Black' }}>
+                        Login
+                    </Text>
+                </Pressable>
+
                 <Link href={'/cadastro/registro'} asChild>
                     <Pressable style={styles.link}>
                         <Text style={{ textDecorationLine: 'underline', color: '#FFFF', fontFamily: 'Gotham-XLight' }}>
                             Crie Sua Conta
                         </Text>
                     </Pressable>
+                </Link>
+                <Link href={'oh my god'} asChild>
+                    <Text style={{color: 'blue'}}>Telas</Text>
                 </Link>
             </View>
         </View>
@@ -116,9 +116,6 @@ const styles = StyleSheet.create({
         height: 80,
         alignItems: 'center',
         justifyContent: 'center'
-    },
-    bpress: {
-        backgroundColor: '#38040E'
     },
     input: {
         backgroundColor: '#640D14',

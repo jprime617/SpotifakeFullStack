@@ -1,31 +1,35 @@
 import React, { useContext } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet, Image } from "react-native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { AuthContext } from "../../scripts/authContext";
 import Inicio from "../inicio/inicio";
 import Icon from 'react-native-vector-icons/Ionicons';
 import Pagar from "../pagamento/pagar";
+import User from "../usuario/usuario";
 
 const Tab = createBottomTabNavigator();
 
 export default function Home() {
+    const { foto, setFoto } = useContext(AuthContext)
 
     return (
-        <View style={styles.container}>
             <Tab.Navigator
                 screenOptions={{
                     headerShown: false,
                     tabBarStyle: {
-                        backgroundColor: 'transparent', // Torna a barra inferior transparente
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Define transparência para a barra
                         borderTopWidth: 0, // Remove a borda superior da barra
-                        position: 'absolute', // Faz com que a barra fique sobreposta ao conteúdo
-                        bottom: 0, // Fixando a barra na parte inferior da tela
+                        position: 'absolute', // Faz a barra flutuar sobre o conteúdo
+                        bottom: 0,
                         left: 0,
                         right: 0,
-                        height: 60, // Altura da barra inferior
-                        zIndex: 999, // Garantir que a barra fique acima de outros elementos
+                        height: 75,
+                        zIndex: 999,
+                        elevation: 0, // Remove sombra no Android
+
                     },
-                    tabBarActiveTintColor: '#fff', // Cor do ícone ativo
-                    tabBarInactiveTintColor: '#8c8c8c', // Cor do ícone inativo
+                    tabBarActiveTintColor: '#fff',
+                    tabBarInactiveTintColor: '#8c8c8c',
                     tabBarLabelStyle: {
                         fontSize: 14,
                         fontWeight: 'bold',
@@ -36,7 +40,8 @@ export default function Home() {
                     name="Inicio"
                     component={Inicio}
                     options={{
-                        tabBarIcon: ({ color, size }) => (<Icon name="home" size={size} color={color} />
+                        tabBarIcon: ({ color, size }) => (
+                            <Icon name="home" size={size} color={color} />
                         ),
                     }}
                 />
@@ -44,7 +49,8 @@ export default function Home() {
                     name="Buscar"
                     component={Inicio}
                     options={{
-                        tabBarIcon: ({ color, size }) => (<Icon name="search" size={size} color={color} />
+                        tabBarIcon: ({ color, size }) => (
+                            <Icon name="search" size={size} color={color} />
                         ),
                     }}
                 />
@@ -52,25 +58,26 @@ export default function Home() {
                     name="Biblioteca"
                     component={Inicio}
                     options={{
-                        tabBarIcon: ({ color, size }) => (<Icon name="albums-outline" size={size} color={color} />
+                        tabBarIcon: ({ color, size }) => (
+                            <Icon name="albums-outline" size={size} color={color} />
                         ),
                     }}
                 />
                 <Tab.Screen
-                    name="Premium"
-                    component={Pagar}
+                    name="Usuário"
+                    component={User}
                     options={{
-                        tabBarIcon: ({ color, size }) => (<Icon name="cash-outline" size={size} color={color} />
+                        tabBarIcon: () => (
+                            <Image style={{width: 40, height: 40, borderRadius: 100}} source={{ uri: foto }} />
                         ),
                     }}
                 />
             </Tab.Navigator>
-        </View>
-    )
-};
+    );
+}
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     }
-})
+});

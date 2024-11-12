@@ -36,7 +36,7 @@ export default function Registro() {
 
     const connect = async () => {
         try {
-            const response = await fetch('http://localhost:8000/autenticacao/registro', {
+            const response = await fetch('http://192.168.0.116:8000/autenticacao/registro', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
