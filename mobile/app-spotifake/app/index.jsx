@@ -28,7 +28,7 @@ export default function Login() {
 
     const connect = async () => {
         try {
-            const response = await fetch('http://192.168.0.116:8000/autenticacao/login', {
+            const response = await fetch('https://c4f6-200-188-227-126.ngrok-free.app/autenticacao/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

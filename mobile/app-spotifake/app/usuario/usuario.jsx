@@ -2,11 +2,14 @@ import { View, Text, Image, StyleSheet, Button, Pressable } from "react-native";
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../scripts/authContext";
 import * as ImagePicker from 'expo-image-picker';
-import jwt_decode, { jwtDecode } from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode'
+import { AdvancedImage, upload } from 'cloudinary-react-native';
+import { Cloudinary } from "@cloudinary/url-gen";
 
 export default function User() {
     const { foto, setFoto, tokien, setTokien } = useContext(AuthContext)
     const infoUser = jwtDecode(tokien)
+
 
     
 
