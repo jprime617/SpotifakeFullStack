@@ -5,7 +5,7 @@ import { useFonts } from 'expo-font';
 import { AuthContext } from '../scripts/authContext';
 
 export default function Login() {
-    const { tokien, setTokien } = useContext(AuthContext)
+    const { tokien, setTokien, ngrok, setNgrok } = useContext(AuthContext)
     const router = useRouter();
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
@@ -28,7 +28,7 @@ export default function Login() {
 
     const connect = async () => {
         try {
-            const response = await fetch('https://c4f6-200-188-227-126.ngrok-free.app/autenticacao/login', {
+            const response = await fetch(`${ngrok}/autenticacao/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

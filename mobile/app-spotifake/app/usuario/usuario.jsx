@@ -5,13 +5,14 @@ import * as ImagePicker from 'expo-image-picker';
 import { jwtDecode } from 'jwt-decode'
 import { AdvancedImage, upload } from 'cloudinary-react-native';
 import { Cloudinary } from "@cloudinary/url-gen";
+import { Link } from "expo-router";
 
 export default function User() {
     const { foto, setFoto, tokien, setTokien } = useContext(AuthContext)
     const infoUser = jwtDecode(tokien)
 
 
-    
+
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -36,11 +37,13 @@ export default function User() {
                     source={{ uri: foto }}
                 />
             </Pressable>
-            <Text style={{color: 'white', width: 200}}>{infoUser.nome_completo}</Text>
-            <Text style={{color: 'white', width: 200}}>{infoUser.status}</Text>
-            <Pressable style={styles.botao}>
-                <Text style={{color: 'white'}}>Premium</Text>
-            </Pressable>
+            <Text style={{ color: 'white', width: 200 }}>{infoUser.nome_completo}</Text>
+            <Text style={{ color: 'white', width: 200 }}>{infoUser.status}</Text>
+            <Link href={'pagamento/pagar'} asChild>
+                <Pressable style={styles.botao}>
+                    <Text style={{ color: 'white' }}>Premium</Text>
+                </Pressable>
+            </Link>
         </View>
     );
 }

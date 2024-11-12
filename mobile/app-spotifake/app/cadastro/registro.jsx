@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, Pressable, TextInput, StyleSheet, StatusBar, Button } from 'react-native';
 import { useState } from 'react';
 import { useFonts } from 'expo-font';
 import { useRouter } from 'expo-router';
+import { AuthContext } from '../../scripts/authContext';
 
 
 export default function Registro() {
+    const { ngrok, setNogrok } = useContext(AuthContext)
     const router = useRouter();
     const [press, setPress] = useState(false)
     const [formData, setFormData] = useState({
@@ -36,7 +38,7 @@ export default function Registro() {
 
     const connect = async () => {
         try {
-            const response = await fetch('https://c4f6-200-188-227-126.ngrok-free.app/autenticacao/registro', {
+            const response = await fetch(`${ngrok}/autenticacao/registro`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
