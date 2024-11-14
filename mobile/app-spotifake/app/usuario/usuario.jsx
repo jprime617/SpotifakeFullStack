@@ -47,16 +47,16 @@ export default function User() {
                 })
             const result = await res.json()
             console.log(result.url)
-            setFormData({ ...formData, foto: result.url })
+            setFormData({ ...formData, foto: result.url})
             console.log(formData)
-
+            uploadFoto()
         } catch (erro) {
             console.log(e)
         }
     };
 
 
-    const connect = async () => {
+    const atualizaSenha = async () => {
         try {
             const response = await fetch(`${ngrok}/usuarios/atualiza`, {
                 method: 'PUT',
@@ -67,12 +67,33 @@ export default function User() {
             });
             const data = await response.text()
             if (response.ok) {
-                if (data = 'Atualizou') {
+                if (data == 'Atualizou') {
                     alert('Atualizou a Senha Man')
                 }
             }
         } catch (erro) {
             console.log(erro)
+        }
+    };
+
+    const uploadFoto = async () => {
+        try {
+            const response = await fetch(`${ngrok}/usuarios/setfoto`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+            const data = await response.text()
+            if (response.ok) {
+                if (data == 'Postou') {
+                    alert('Foi a Foto')
+                }
+            }
+        } catch (error) {
+            console.log(error)
+            console.log(formData)
         }
     }
 
@@ -119,7 +140,7 @@ export default function User() {
                         onChangeText={(alek) => setFormData({ ...formData, senha: alek })}
                         placeholderTextColor='gray'
                     />
-                    <Pressable style = {styles.botao} onPress={() => {connect(), setModalVisible(false)}}>
+                    <Pressable style = {styles.botao} onPress={() => {atualizaSenha(), setModalVisible(false)}}>
                         <Text style = {{color: 'white'}}>Trocar</Text>
                     </Pressable>
                 </View>

@@ -9,7 +9,7 @@ const listUser = async (req, res) => {
 
 const getUser = async (req, res) => {
     const { id } = req.body;
-    const receba = await User.findOne({ where: { id: id }, attributes: ['nome', 'sobrenome', 'email', 'status', 'dataNascimento'] })
+    const receba = await User.findOne({ where: { id: id }, attributes: ['nome', 'sobrenome', 'email', 'status', 'dataNascimento', 'foto'] })
     res.send(receba)
 }
 
@@ -33,4 +33,14 @@ const trocaSenha = async (req, res) => {
     res.send('Atualizou')
 }
 
-export { listUser, deleteUser, getUser, trocaSenha }
+const salvarFoto = async ( req, res) => {
+    const info = req.body;
+    const receba = await User.findOne({ where: {email: info.email}});
+    if (!receba) {
+        return res.send('Esse User ai nao existe')
+    };
+    const atualiza = await User.update({ foto: info.foto}, { where: {email: info.email}})
+    res.send('Postou')
+}
+
+export { listUser, deleteUser, getUser, trocaSenha, salvarFoto }
