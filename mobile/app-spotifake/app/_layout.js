@@ -2,6 +2,8 @@ import { Stack } from 'expo-router';
 import { AuthProvider } from '../scripts/authContext';
 
 const Layout = () => {
+
+
   return (
     <AuthProvider>
       <Stack screenOptions={{

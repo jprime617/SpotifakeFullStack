@@ -8,8 +8,8 @@ const listUser = async (req, res) => {
 }
 
 const getUser = async (req, res) => {
-    const { id } = req.body;
-    const receba = await User.findOne({ where: { id: id }, attributes: ['nome', 'sobrenome', 'email', 'status', 'dataNascimento', 'foto'] })
+    const info = req.body;
+    const receba = await User.findOne({ where: { email: info.email }, attributes: ['nome', 'sobrenome', 'email', 'status', 'dataNascimento', 'foto'] })
     res.send(receba)
 }
 

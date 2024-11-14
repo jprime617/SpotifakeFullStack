@@ -1,12 +1,12 @@
 import { View, Text, Image, StyleSheet, Button, Pressable, Modal, TextInput } from "react-native";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../scripts/authContext.js";
 import * as ImagePicker from 'expo-image-picker';
 import { jwtDecode } from 'jwt-decode'
 import { Link } from "expo-router";
 
 export default function User() {
-    const { foto, setFoto, tokien, ngrok } = useContext(AuthContext)
+    const { foto, setFoto, tokien, ngrok, userInfo, setUserInfo } = useContext(AuthContext)
     const infoUser = jwtDecode(tokien)
     const [formData, setFormData] = useState({ foto: '', email: infoUser.email, senha: '' })
     const [modalVisible, setModalVisible] = useState(false)
@@ -14,6 +14,26 @@ export default function User() {
 
 
 
+    const getUserInfo = async () => {
+        try {
+            const response = await fetch(`${ngrok}/usuarios/receber`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json()
+            setUserInfo(data)
+            console.log(JSON.stringify(userInfo))
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
+    useEffect(() => {
+        getUserInfo();
+    }, []);
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -27,6 +47,7 @@ export default function User() {
 
         if (!result.canceled) {
             setFoto(result.assets[0].uri);
+            handleSendImage();
         }
     };
 
@@ -47,9 +68,13 @@ export default function User() {
                 })
             const result = await res.json()
             console.log(result.url)
-            setFormData({ ...formData, foto: result.url})
-            console.log(formData)
-            uploadFoto()
+            if (!foto) {
+                return handleSendImage()
+            } else {
+                setFormData({ ...formData, foto: result.url })
+                uploadFoto()
+            }
+
         } catch (erro) {
             console.log(e)
         }
@@ -77,76 +102,89 @@ export default function User() {
     };
 
     const uploadFoto = async () => {
-        try {
-            const response = await fetch(`${ngrok}/usuarios/setfoto`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            });
-            const data = await response.text()
-            if (response.ok) {
-                if (data == 'Postou') {
-                    alert('Foi a Foto')
+        if (!formData) {
+            return uploadFoto()
+        } else {
+            try {
+                const response = await fetch(`${ngrok}/usuarios/setfoto`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                const data = await response.text()
+                if (response.ok) {
+                    if (data == 'Postou') {
+                        alert('Foi a Foto')
+                    }
                 }
+            } catch (error) {
+                console.log(error)
+                console.log(formData)
             }
-        } catch (error) {
-            console.log(error)
-            console.log(formData)
         }
-    }
+    
+
+};
 
 
 
 
 
-    return (
-        <View style={styles.container}>
-            <Pressable onPress={() => pickImage()}>
-                <Image
-                    style={{ height: 200, width: 200, borderRadius: 100 }}
-                    source={{ uri: foto }}
+
+
+
+
+return (
+    <View style={styles.container}>
+        <Pressable onPress={() => pickImage()}>
+            <Image
+                style={{ height: 200, width: 200, borderRadius: 100 }}
+                source={{ uri: foto }}
+            />
+        </Pressable>
+        <Text style={{ color: 'white', width: 200 }}>{infoUser.nome_completo}</Text>
+        <Text style={{ color: 'white', width: 200 }}>{infoUser.status}</Text>
+        <Link href={'pagamento/pagar'} asChild>
+            <Pressable style={styles.botao}>
+                <Text style={{ color: 'white' }}>Premium</Text>
+            </Pressable>
+        </Link>
+        <Pressable onPress={() => handleSendImage()}>
+            <Text style={{ color: 'white' }}>upload</Text>
+        </Pressable>
+        <Pressable onPress={() => setModalVisible(true)}>
+            <Text style={{ color: 'white' }}>Trocar Senha</Text>
+        </Pressable>
+        <Text style={{ color: 'white' }}>Clique na imagem para trocar</Text>
+        <Pressable onPress={() => console.log(JSON.stringify(userInfo))}>
+            <Text style={{ color: 'white' }}>OLHA AI</Text>
+        </Pressable>
+        <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+                Alert.alert('Modal Fechou');
+                setModalVisible(!modalVisible);
+            }}>
+            <View style={styles.container}>
+                <Text style={{ color: 'white', marginBottom: 30, fontSize: 30 }}>Trocar Senha</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder='Senha Nova'
+                    value={formData.senha}
+                    onChangeText={(alek) => setFormData({ ...formData, senha: alek })}
+                    placeholderTextColor='gray'
                 />
-            </Pressable>
-            <Text style={{ color: 'white', width: 200 }}>{infoUser.nome_completo}</Text>
-            <Text style={{ color: 'white', width: 200 }}>{infoUser.status}</Text>
-            <Link href={'pagamento/pagar'} asChild>
-                <Pressable style={styles.botao}>
-                    <Text style={{ color: 'white' }}>Premium</Text>
+                <Pressable style={styles.botao} onPress={() => { atualizaSenha(), setModalVisible(false) }}>
+                    <Text style={{ color: 'white' }}>Trocar</Text>
                 </Pressable>
-            </Link>
-            <Pressable onPress={() => handleSendImage()}>
-                <Text style={{ color: 'white' }}>upload</Text>
-            </Pressable>
-            <Pressable onPress={() => setModalVisible(true)}>
-                <Text style={{ color: 'white' }}>Trocar Senha</Text>
-            </Pressable>
-            <Text style={{color: 'white'}}>Clique na imagem para trocar</Text>
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                    Alert.alert('Modal Fechou');
-                    setModalVisible(!modalVisible);
-                }}>
-                <View style={styles.container}>
-                    <Text style={{color: 'white', marginBottom: 30, fontSize: 30}}>Trocar Senha</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Senha Nova'
-                        value={formData.senha}
-                        onChangeText={(alek) => setFormData({ ...formData, senha: alek })}
-                        placeholderTextColor='gray'
-                    />
-                    <Pressable style = {styles.botao} onPress={() => {atualizaSenha(), setModalVisible(false)}}>
-                        <Text style = {{color: 'white'}}>Trocar</Text>
-                    </Pressable>
-                </View>
-            </Modal>
-        </View>
-    );
+            </View>
+        </Modal>
+    </View>
+);
 }
 
 const styles = StyleSheet.create({
