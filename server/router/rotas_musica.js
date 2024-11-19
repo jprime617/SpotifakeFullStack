@@ -1,5 +1,5 @@
 import Express from "express";
-import { getMusica } from "../controller/controlador_musica";
+import { getMusica } from "../controller/controlador_musica.js";
 
 const rotas_musica = Express.Router()
 

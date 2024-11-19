@@ -1,4 +1,4 @@
-import { Artista } from "../db";
+import { Artista } from "../db.js";
 
 const getMusica = async (req, res) => {
     const info = req.body
