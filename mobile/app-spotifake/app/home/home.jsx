@@ -4,7 +4,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AuthContext } from "../../scripts/authContext";
 import Inicio from "../inicio/inicio";
 import Icon from 'react-native-vector-icons/Ionicons';
-import Pagar from "../pagamento/pagar";
 import User from "../usuario/usuario";
 
 const Tab = createBottomTabNavigator();
