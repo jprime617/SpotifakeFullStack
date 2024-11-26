@@ -14,7 +14,7 @@ const getAlbum = async (req, res) => {
 
 const getMusica = async (req, res) => {
     const info = req.body
-    const receba = await Album.findAll({ where: {titulo: info.nome}})
+    const receba = await Musica.findAll({ where: {titulo: info.nome}})
     res.json(receba)
 };
 

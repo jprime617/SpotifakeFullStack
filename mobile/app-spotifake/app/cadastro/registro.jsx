@@ -80,7 +80,7 @@ export default function Registro() {
                     style={styles.input}
                     placeholder='Nome'
                     value={formData.nome}
-                    onChangeText={(alek) => setFormData({ ...formData, nome: alek })}
+                    onChangeText={(nossa) => setFormData({ ...formData, sobrenome: nossa})}
                     placeholderTextColor='gray'
                 />
                 <TextInput
@@ -126,6 +126,9 @@ export default function Registro() {
                     <Text style={{ color: '#FFFF', fontSize: 20, fontFamily: 'Gotham-Black' }}>
                         Registrar
                     </Text>
+                </Pressable>
+                <Pressable onPress={console.log(formData)}>
+                    <Text>Nossa</Text>
                 </Pressable>
             </View>
 
