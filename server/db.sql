@@ -1,25 +1,25 @@
 INSERT INTO artists (nome, bio, "imageUrl", "createdAt", "updatedAt") VALUES
-('Yung Lixo', 'Rapper brasileiro conhecido por suas letras irônicas e criativas.', 'https://example.com/yunglixo.jpg', NOW(), NOW()),
-('Michael Jackson', 'Conhecido como o Rei do Pop, Michael Jackson é um dos artistas mais influentes da música mundial.', 'https://example.com/michaeljackson.jpg', NOW(), NOW()),
-('Queen', 'Banda britânica de rock formada em 1970, famosa por sucessos como "Bohemian Rhapsody" e "We Will Rock You".', 'https://example.com/queen.jpg', NOW(), NOW()),
-('Roberto Carlos', 'Cantor e compositor brasileiro, conhecido como o Rei da Música Romântica no Brasil.', 'https://example.com/robertocarlos.jpg', NOW(), NOW());
+('Yung Lixo', 'Rapper brasileiro conhecido por suas letras irônicas e criativas.', 'https://yt3.googleusercontent.com/ytc/AIdro_lVOrsAQ5Qxzi3Kv0ugiVEzi27Zew2jjd20_VXq3KPR1tA=s900-c-k-c0x00ffffff-no-rj', NOW(), NOW()),
+('Michael Jackson', 'Conhecido como o Rei do Pop, Michael Jackson é um dos artistas mais influentes da música mundial.', 'https://mjbeats.com.br/wp-content/uploads/2024/06/Michael-Jackson-o-Rei-do-Pop-MJ-Beats.jpeg.webp', NOW(), NOW()),
+('Queen', 'Banda britânica de rock formada em 1970, famosa por sucessos como "Bohemian Rhapsody" e "We Will Rock You".', 'https://imusic.b-cdn.net/images/item/original/531/5050293858531.jpg?queen-queen-logo-slipmat-vinyl-accessory&class=scaled&v=1638973630', NOW(), NOW()),
+('Roberto Carlos', 'Cantor e compositor brasileiro, conhecido como o Rei da Música Romântica no Brasil.', 'https://yt3.googleusercontent.com/ZImswuUeY9NmW7zmgBwW7j4IUVjJOlWSlHxG-1DyYv9-VkFFkMbamCf9LgrtF4VwIn6WCWY-KA=s900-c-k-c0x00ffffff-no-rj', NOW(), NOW());
 
 INSERT INTO albums (title, "releaseYear", "coverImageUrl", "createdAt", "updatedAt", "artista_id") VALUES
 -- Yung Lixo
-('Validation Deluxe', 2023, 'https://example.com/sucessosquevoceodeia.jpg', NOW(), NOW(), 1),
-('Bittersweat Memories', 2023, 'https://example.com/vademecum.jpg', NOW(), NOW(), 1),
+('Validation Deluxe', 2023, 'https://i.scdn.co/image/ab67616d0000b27339021beae61ff9bfc5135b4b', NOW(), NOW(), 1),
+('Bittersweet Memories', 2023, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkWMAUe8iiWPoQQUbrSnM7_8WLs_ulzRWYPg&s', NOW(), NOW(), 1),
 
 -- Michael Jackson
-('Thriller', 1982, 'https://example.com/thriller.jpg', NOW(), NOW(), 2),
-('Bad', 1987, 'https://example.com/bad.jpg', NOW(), NOW(), 2),
+('Thriller', 1982, 'https://i.scdn.co/image/ab67616d0000b273de437d960dda1ac0a3586d97', NOW(), NOW(), 2),
+('Bad', 1987, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStep0q8UYqVHVo4DfoNdFHSKDjWQInSrRSjw&s', NOW(), NOW(), 2),
 
 -- Queen
-('A Night at the Opera', 1975, 'https://example.com/anightattheopera.jpg', NOW(), NOW(), 3),
-('News of the World', 1977, 'https://example.com/newsoftheworld.jpg', NOW(), NOW(), 3),
+('A Night at the Opera', 1975, 'https://upload.wikimedia.org/wikipedia/pt/b/bf/A_Night_at_the_Opera_Queen.jpg', NOW(), NOW(), 3),
+('News of the World', 1977, 'https://upload.wikimedia.org/wikipedia/pt/7/7d/Queen-News_of_the_World.jpg', NOW(), NOW(), 3),
 
 -- Roberto Carlos
-('Roberto Carlos em Ritmo de Aventura', 1967, 'https://example.com/emritmodeaventura.jpg', NOW(), NOW(), 4),
-('Detalhes', 1971, 'https://example.com/detalhes.jpg', NOW(), NOW(), 4);
+('Roberto Carlos em Ritmo de Aventura', 1967, 'https://upload.wikimedia.org/wikipedia/pt/a/ad/Roberto_Carlos_em_ritmo_de_aventura.jpg', NOW(), NOW(), 4),
+('Detalhes', 1971, 'https://i.scdn.co/image/ab67616d0000b273493c3f41931ffbe4994f390a', NOW(), NOW(), 4);
 
 
 

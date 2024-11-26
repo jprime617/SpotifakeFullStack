@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { StyleSheet, Image } from "react-native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AuthContext } from "../../scripts/authContext";
@@ -10,6 +10,8 @@ const Tab = createBottomTabNavigator();
 
 export default function Home() {
     const { foto, setFoto } = useContext(AuthContext)
+
+
 
     return (
             <Tab.Navigator

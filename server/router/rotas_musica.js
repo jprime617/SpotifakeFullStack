@@ -3,8 +3,8 @@ import { getMusica, getAlbum, getArtista } from "../controller/controlador_music
 
 const rotas_musica = Express.Router()
 
-rotas_musica.post('/artistas', getArtista);
+rotas_musica.get('/artistas', getArtista);
 rotas_musica.post('/musicas', getMusica);
-rotas_musica.post('/albums', getAlbum);
+rotas_musica.get('/albums', getAlbum);
 
 export { rotas_musica }
