@@ -5,6 +5,7 @@ import { AuthContext } from "../../scripts/authContext";
 import Inicio from "../inicio/inicio";
 import Icon from 'react-native-vector-icons/Ionicons';
 import User from "../usuario/usuario";
+import Player from "../player/player";
 
 const Tab = createBottomTabNavigator();
 
@@ -57,7 +58,7 @@ export default function Home() {
                 />
                 <Tab.Screen
                     name="Biblioteca"
-                    component={Inicio}
+                    component={Player}
                     options={{
                         tabBarIcon: ({ color, size }) => (
                             <Icon name="albums-outline" size={size} color={color} />

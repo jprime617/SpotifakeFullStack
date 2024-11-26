@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, Pressable, TextInput, StyleSheet, StatusBar, Button } from 'react-native';
 import { Link, useRouter } from 'expo-router'
 import { useFonts } from 'expo-font';
 import { AuthContext } from '../scripts/authContext.js';
 
 export default function Login() {
-    const { tokien, setTokien, ngrok, setNgrok } = useContext(AuthContext)
+    const { tokien, setTokien, ngrok, setNgrok, foto, setFoto } = useContext(AuthContext)
     const router = useRouter();
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
@@ -50,6 +50,16 @@ export default function Login() {
             console.error("Erro ao conectar ao servidor:", error);
         }
     };
+
+    useEffect(() => {
+        const nossa = async () => {
+            try{
+                const response = await fetch(`${ngrok}/usuarios/receber`)
+            }catch (error) {
+                console.log(error)
+            }
+        }
+    }, [])
 
 
 
