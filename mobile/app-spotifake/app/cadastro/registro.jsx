@@ -80,7 +80,7 @@ export default function Registro() {
                     style={styles.input}
                     placeholder='Nome'
                     value={formData.nome}
-                    onChangeText={(nossa) => setFormData({ ...formData, sobrenome: nossa})}
+                    onChangeText={(nossa) => setFormData({ ...formData, nome: nossa})}
                     placeholderTextColor='gray'
                 />
                 <TextInput
