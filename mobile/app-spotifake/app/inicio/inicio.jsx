@@ -37,9 +37,9 @@ export default function Inicio() {
 
                 const data = await response.json();
                 const dataA = await responseA.json();
-                console.log("Dados recebidos:", JSON.stringify(data)); // Log para depuração
-                setArtInfo(data); // Certifique-se de que `data` seja um array
-                setArtAlbu(dataA)
+                console.log("Dados recebidos:", JSON.stringify(data));
+                setArtInfo(data);
+                setArtAlbu(dataA);
 
 
             } catch (error) {

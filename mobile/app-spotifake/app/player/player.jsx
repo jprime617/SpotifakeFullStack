@@ -23,7 +23,7 @@ export default function Player() {
 
             // Caso contrário, carregue um novo áudio
             const { sound: newSound } = await Audio.Sound.createAsync({
-                uri: 'https://s184.convertio.me/p/sA2TZgLU8vwS_S9nI20-4A/c4ad23604b9fa369954d202971d5717a/yun-li-flores-de-outro-carnaval-_prod-biffe_-hakuro-_-yun-li__MP3_160K_.mp3',
+                uri: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
             });
 
             setSound(newSound);
@@ -80,10 +80,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f4f4f4',
+        backgroundColor: '#250902',
     },
     title: {
         fontSize: 20,
         marginBottom: 20,
+        color: 'white'
     },
 });

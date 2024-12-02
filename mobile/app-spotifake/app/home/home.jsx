@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet, Image, View } from "react-native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AuthContext } from "../../scripts/authContext";
 import Inicio from "../inicio/inicio";
@@ -11,6 +11,10 @@ const Tab = createBottomTabNavigator();
 
 export default function Home() {
     const { foto, setFoto } = useContext(AuthContext)
+
+    function Buscar() {
+        <View><Text>Buscar</Text></View>
+    }
 
 
 
@@ -49,7 +53,7 @@ export default function Home() {
                 />
                 <Tab.Screen
                     name="Buscar"
-                    component={Inicio}
+                    component={Buscar}
                     options={{
                         tabBarIcon: ({ color, size }) => (
                             <Icon name="search" size={size} color={color} />
@@ -57,7 +61,7 @@ export default function Home() {
                     }}
                 />
                 <Tab.Screen
-                    name="Biblioteca"
+                    name="Player"
                     component={Player}
                     options={{
                         tabBarIcon: ({ color, size }) => (

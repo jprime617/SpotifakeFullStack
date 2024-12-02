@@ -5,7 +5,7 @@ import { useFonts } from 'expo-font';
 import { AuthContext } from '../scripts/authContext.js';
 
 export default function Login() {
-    const { tokien, setTokien, ngrok, setNgrok, foto, setFoto } = useContext(AuthContext)
+    const { tokien, setTokien, ngrok } = useContext(AuthContext)
     const router = useRouter();
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
